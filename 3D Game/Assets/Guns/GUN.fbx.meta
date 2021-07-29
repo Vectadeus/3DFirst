@@ -1,50 +1,8 @@
 fileFormatVersion: 2
-guid: 31c2be6bc0bcefc4fb5d16ee0a5251e1
+guid: 9bf215f2231c2f244b1e47885871d9ba
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: 5869890656693009229
-    second: Light|Cube.001Action
-  - first:
-      74: 1568525092102840595
-    second: Light|Cube.002Action.001
-  - first:
-      74: -1437223564310770781
-    second: Armature|0Tpose
-  - first:
-      74: -1559071518392153964
-    second: Armature|Cube.001Action
-  - first:
-      74: -7674904370128968613
-    second: Armature|Cube.002Action.001
-  - first:
-      74: -8945691123924629249
-    second: Armature|Idle
-  - first:
-      74: -3828583913261678786
-    second: Armature|Running
-  - first:
-      74: -3928335905944832397
-    second: Armature|Sliding.001
-  - first:
-      74: -3915131422061517104
-    second: Empty|Cube.001Action
-  - first:
-      74: -6150361803000698133
-    second: Empty|Cube.002Action.001
-  - first:
-      74: -8515560403302317629
-    second: Cube.001|Cube.001Action
-  - first:
-      74: -503583810911536189
-    second: Cube.001|Cube.002Action.001
-  - first:
-      74: 978295544477664516
-    second: Cube.002|Cube.001Action
-  - first:
-      74: 6188143692413826237
-    second: Cube.002|Cube.002Action.001
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
