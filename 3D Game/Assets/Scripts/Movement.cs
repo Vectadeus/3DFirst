@@ -10,8 +10,12 @@ public class Movement : MonoBehaviour
     Vector3 MoveVector;
 
 
+
+    //GravityStuff
     Vector3 Velocity;
     public float Gravity;
+    bool GravityGanuleba;
+
 
     //Jumping
     public float JumpStrength;
@@ -38,7 +42,7 @@ public class Movement : MonoBehaviour
     public Animator anim;
 
 
-
+    
 
     private void OnEnable()
     {
@@ -86,10 +90,17 @@ public class Movement : MonoBehaviour
 
     void Gravitation()
     {
-        Velocity.y += Gravity * Time.deltaTime;
-        Controller.Move(Velocity * Time.deltaTime);
-    }
 
+            Velocity.y += Gravity * Time.deltaTime;
+            Controller.Move(Velocity * Time.deltaTime);
+
+        if (IsGrounded && Velocity.y < 0)
+        {
+            Velocity.y = -2f;
+        }
+
+      
+    }
     void Jump()
     {
         if (Input.GetButton("Jump") && IsGrounded)
@@ -101,6 +112,7 @@ public class Movement : MonoBehaviour
     void CheckGround()
     {
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundCheckRadius, GroundMask);
+
     }
 
 
@@ -132,8 +144,7 @@ public class Movement : MonoBehaviour
             Controller.height = PrevControllerColliderSize;
             Controller.center = prevControllerCetner;
         }
-    }//CLASS
-
+    }
 
     IEnumerator CheckMovement()
     {
