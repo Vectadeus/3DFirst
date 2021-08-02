@@ -14,13 +14,14 @@ public class LookAround : MonoBehaviour
     public Vector3 CameraOffset;
 
 
+
     void Look()
     {
         float MouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
         float MouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
         PlayerTransform.Rotate(Vector3.up * MouseX);
         Xrotation -= MouseY;
-        Xrotation = Mathf.Clamp(Xrotation, -90f, 90);
+        Xrotation = Mathf.Clamp(Xrotation, -72f, 80f);
         transform.localRotation = Quaternion.Euler(Xrotation, 0f, 0f);
     }
     
