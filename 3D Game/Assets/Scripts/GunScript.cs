@@ -13,7 +13,7 @@ public class GunScript : MonoBehaviour
     public Transform CameraTransform;
     public float Range;
     public Collider Nearest;
-
+    private RaycastHit NearestRayHit;
 
     //Rotations
     public Transform HandleTransform;
@@ -26,6 +26,7 @@ public class GunScript : MonoBehaviour
     //Particles and animations
     public ParticleSystem MuzzleFlash;
     public GameObject HitParticles;
+    public GameObject EnemyHitParticles;
     private Animator anim;
 
 
@@ -94,10 +95,12 @@ public class GunScript : MonoBehaviour
                             if (Nearest != null && Vector3.Distance(transform.position, rayhits.transform.position) < Vector3.Distance(transform.position, Nearest.transform.position))
                             {
                                 Nearest = rayhits.collider;
+                                NearestRayHit = rayhits;
                             } //IF NEAREST IS 0 WE CAN SET IT TO ANYTHING
                             else
                             {
                                 Nearest = rayhits.collider;
+                                NearestRayHit = rayhits;
                             }
                         }
                     }
@@ -105,19 +108,24 @@ public class GunScript : MonoBehaviour
 
 
                     //DAMAGE NEAREST TARGET
-
                     if (Nearest != null)
                     {
+                        // 9TH LAYER IS ENEMY LAYER
+                        if(NearestRayHit.transform.gameObject.layer != 9)
+                        {
+                            Instantiate(HitParticles, NearestRayHit.point, Quaternion.identity);
+                        }
                         EnemyHealthScript _EnemyHealth = Nearest.GetComponent<EnemyHealthScript>();
                         if (_EnemyHealth != null)
                         {
 
                             _EnemyHealth.TakeDamage(Damage);
+                            Instantiate(EnemyHitParticles, NearestRayHit.point , Quaternion.identity);
                         }
+
 
                     }
                 }
-                Debug.Log(Nearest);
                 Nearest = null;
             }
             
