@@ -30,6 +30,11 @@ public class GunScript : MonoBehaviour
     private Animator anim;
 
 
+
+    //TEST
+    float PrevDistance;
+
+
     private void OnEnable()
     {
         anim = GetComponent<Animator>();
@@ -71,6 +76,7 @@ public class GunScript : MonoBehaviour
         {
             if(Time.time >= NextTimeToFire)
             {
+                PrevDistance = Range;
                 NextTimeToFire = Time.time + 1f / FireRate;
                 MuzzleFlash.Play();
 
@@ -82,6 +88,8 @@ public class GunScript : MonoBehaviour
                 RaycastHit[] hits;
 
                 hits = Physics.RaycastAll(CameraTransform.position, CameraTransform.transform.forward, Range);
+
+
  
                 if (Physics.Raycast(CameraTransform.position, CameraTransform.transform.forward, Range))
                 {
@@ -90,17 +98,13 @@ public class GunScript : MonoBehaviour
                     {
                         // PLAYER LAYER IS 8TH LAYER
                         if (rayhits.collider.gameObject.layer != 8)
-                        {
+                        {                            
                             //Check if previous was more near
-                            if (Nearest != null && Vector3.Distance(transform.position, rayhits.transform.position) < Vector3.Distance(transform.position, Nearest.transform.position))
+                            if (Vector3.Distance(transform.position, rayhits.transform.position) < PrevDistance)
                             {
                                 Nearest = rayhits.collider;
                                 NearestRayHit = rayhits;
-                            } //IF NEAREST IS 0 WE CAN SET IT TO ANYTHING
-                            else
-                            {
-                                Nearest = rayhits.collider;
-                                NearestRayHit = rayhits;
+                                PrevDistance = Vector3.Distance(transform.position, Nearest.transform.position);
                             }
                         }
                     }
@@ -113,20 +117,34 @@ public class GunScript : MonoBehaviour
                         // 9TH LAYER IS ENEMY LAYER
                         if(NearestRayHit.transform.gameObject.layer != 9)
                         {
-                            Instantiate(HitParticles, NearestRayHit.point, Quaternion.identity);
+                            GameObject Particles = Instantiate(HitParticles, NearestRayHit.point, Quaternion.identity);
+                            Destroy(Particles, 2f);
+
                         }
+
                         EnemyHealthScript _EnemyHealth = Nearest.GetComponent<EnemyHealthScript>();
+                        if(_EnemyHealth == null)
+                        {
+                            _EnemyHealth = Nearest.GetComponentInParent<EnemyHealthScript>();
+                        }
+
                         if (_EnemyHealth != null)
                         {
 
                             _EnemyHealth.TakeDamage(Damage);
-                            Instantiate(EnemyHitParticles, NearestRayHit.point , Quaternion.identity);
+                            GameObject particles = Instantiate(EnemyHitParticles, NearestRayHit.point, Quaternion.identity);
+                            Destroy(particles, 2f);
+                        }
+                        else
+                        {
+
                         }
 
 
                     }
                 }
-                Nearest = null;
+                Debug.Log(Nearest);
+                
             }
             
 
@@ -135,7 +153,10 @@ public class GunScript : MonoBehaviour
     }
 
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(CameraTransform.position, CameraTransform.transform.forward);
+    }
 
     void Rotations()
     {
