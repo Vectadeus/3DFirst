@@ -11665,7 +11665,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18762
+  m_Name: pb_Mesh18570
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25019,7 +25019,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21002
+  m_Name: pb_Mesh20830
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -37378,6 +37378,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4879002237812562, guid: 48747a2f9069f384597b1a434690ae2d, type: 3}
   m_PrefabInstance: {fileID: 1273475819}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1517709570 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5590986491965208298, guid: 545d094b91e35414eab9bd5a0b7bb20b, type: 3}
+  m_PrefabInstance: {fileID: 5590986493265510485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1519225161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38736,7 +38741,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19484
+  m_Name: pb_Mesh19302
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -54896,6 +54901,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5590986491965208215, guid: 545d094b91e35414eab9bd5a0b7bb20b, type: 3}
+      propertyPath: GunHandlePos
+      value: 
+      objectReference: {fileID: 1517709570}
+    - target: {fileID: 5590986491965208215, guid: 545d094b91e35414eab9bd5a0b7bb20b, type: 3}
+      propertyPath: handleOffset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5590986491965208215, guid: 545d094b91e35414eab9bd5a0b7bb20b, type: 3}
       propertyPath: EnemyHitParticles
       value: 

@@ -17,7 +17,7 @@ public class GunScript : MonoBehaviour
 
     //Rotations
     public Transform HandleTransform;
-    public Transform ArmTransform;
+    public Transform GunHandlePos;
     public Vector3 offset;
     public Vector3 handleOffset;
     public Quaternion RotOffset;
@@ -161,8 +161,9 @@ public class GunScript : MonoBehaviour
     void Rotations()
     {
         HandleTransform.rotation = transform.rotation * RotOffset;
-        transform.position = Vector3.Lerp(transform.position, ArmTransform.position + transform.TransformDirection(offset), 1f);
-        HandleTransform.position = Vector3.Lerp(transform.position, ArmTransform.position + transform.TransformDirection(handleOffset), 1f);
+        //transform.position = Vector3.Lerp(transform.position, ArmTransform.position + transform.TransformDirection(offset), 1f);
+        //HandleTransform.position = Vector3.Lerp(transform.position, GunHandlePos.position + transform.TransformDirection(handleOffset), 50f);
+        //HandleTransform.position = GunHandlePos.position;
     }
 
 }//CLASS
