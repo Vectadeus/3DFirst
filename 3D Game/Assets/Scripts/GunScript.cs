@@ -27,7 +27,7 @@ public class GunScript : MonoBehaviour
     public ParticleSystem MuzzleFlash;
     public GameObject HitParticles;
     public GameObject EnemyHitParticles;
-    private Animator anim;
+    [SerializeField] private  Animator anim;
 
 
 
@@ -35,15 +35,9 @@ public class GunScript : MonoBehaviour
     float PrevDistance;
 
 
-    private void OnEnable()
-    {
-        anim = GetComponent<Animator>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+
+
 
     // Update is called once per frame
     void Update()
