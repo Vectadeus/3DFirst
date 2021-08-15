@@ -16,12 +16,18 @@ public class GunScript : MonoBehaviour
     private RaycastHit NearestRayHit;
 
     //Rotations
-    public Transform HandleTransform;
-    public Transform GunHandlePos;
-    public Vector3 offset;
-    public Vector3 handleOffset;
-    public Quaternion RotOffset;
+    //public Transform HandleTransform;
+    //public Transform GunHandlePos;
+    //public Vector3 offset;
+    //public Vector3 handleOffset;
+    //public Quaternion RotOffset;
 
+
+    //WeaponSway
+    [SerializeField] private float SwayAmount;
+    [SerializeField] private float SwaySmoothing;
+    [SerializeField] private Transform HandTransform;
+    private Vector3 initialPos;
 
     //Particles and animations
     public ParticleSystem MuzzleFlash;
@@ -36,7 +42,10 @@ public class GunScript : MonoBehaviour
 
 
 
-
+    private void Start()
+    {
+        initialPos = HandTransform.localPosition;
+    }
 
 
     // Update is called once per frame
@@ -53,6 +62,8 @@ public class GunScript : MonoBehaviour
         {
             Nearest = null;
         }
+
+        WeaponSway();
     }
 
 
@@ -61,7 +72,15 @@ public class GunScript : MonoBehaviour
 
 
 
+    void WeaponSway()
+    {
+        float swayX = Input.GetAxis("Mouse X") * SwayAmount;
+        float swayY = Input.GetAxis("Mouse Y") * SwayAmount;
 
+        Vector3 finalPos = new Vector3(swayX, swayY, 0);
+        HandTransform.localPosition = Vector3.Lerp(HandTransform.localPosition, finalPos + initialPos, Time.deltaTime * SwaySmoothing);
+
+    }
 
 
     void shoot()
@@ -154,7 +173,7 @@ public class GunScript : MonoBehaviour
 
     void Rotations()
     {
-        HandleTransform.rotation = transform.rotation * RotOffset;
+        //HandleTransform.rotation = transform.rotation * RotOffset;
         //transform.position = Vector3.Lerp(transform.position, ArmTransform.position + transform.TransformDirection(offset), 1f);
         //HandleTransform.position = Vector3.Lerp(transform.position, GunHandlePos.position + transform.TransformDirection(handleOffset), 50f);
         //HandleTransform.position = GunHandlePos.position;
