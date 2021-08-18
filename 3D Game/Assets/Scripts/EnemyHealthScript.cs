@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class EnemyHealthScript : MonoBehaviour
 {
-    public EnemyMovement EnemyMovement;
-    public NavMeshAgent agent;
-    public Animator anim;
-    public CharacterController characterController;
-    public float Health;
+    [SerializeField] private float Health;
+
+    private EnemyMovement EnemyMovement;
+    private NavMeshAgent agent;
+    private Animator anim;
+    private CharacterController characterController;
 
     private void OnEnable()
     {

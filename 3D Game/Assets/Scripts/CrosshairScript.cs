@@ -7,7 +7,7 @@ public class CrosshairScript : MonoBehaviour
 {
     private RectTransform rect;
 
-    [Range(50f, 250f)]
+    [Range(10f, 250f)]
     public float size;
     // Start is called before the first frame update
     void Start()

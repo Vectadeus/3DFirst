@@ -4,42 +4,41 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float Speed;
-    public CharacterController Controller;
-    public LookAround lookAround;
-    Vector3 MoveVector;
+    [SerializeField] private float Speed;
+    [SerializeField] private CharacterController Controller;
+
+    private LookAround lookAround;
+    private Vector3 MoveVector;
 
 
 
     //GravityStuff
-    Vector3 Velocity;
-    public float Gravity;
-    bool GravityGanuleba;
+    [SerializeField] private float Gravity;
+    private Vector3 Velocity;
+    private bool GravityGanuleba;
 
 
     //Jumping
-    public float JumpStrength;
-    bool IsGrounded;
-    public Transform GroundCheck;
-    public float GroundCheckRadius;
-    public LayerMask GroundMask;
+    [SerializeField] private float JumpStrength;
+    [SerializeField] private Transform GroundCheck;
+    [SerializeField] private float GroundCheckRadius;
+    [SerializeField] private LayerMask GroundMask;
+    private bool IsGrounded;
 
 
 
     //MOVING
-    bool isMoving;
-    Vector3 PlayerSavedScale;
-    Vector3 CControllerSavedSizes; //Character controller's Saved sizes
-
+    [SerializeField] private Transform playerTransform;
+    private bool isMoving;
 
 
     //SLIDING
-    public bool IsSliding;
-    float PrevControllerColliderSize;
-    Vector3 prevControllerCetner;
+    private bool IsSliding;
+    private float PrevControllerColliderSize;
+    private Vector3 prevControllerCetner;
 
     //ANIMATIONS
-    public Animator anim;
+    private Animator anim;
 
 
     
@@ -83,7 +82,7 @@ public class Movement : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-        MoveVector = lookAround.PlayerTransform.right * x + lookAround.PlayerTransform.forward * y;
+        MoveVector = playerTransform.right * x + playerTransform.forward * y;
         Controller.Move(MoveVector * Speed * Time.deltaTime);
     }
 
@@ -149,10 +148,10 @@ public class Movement : MonoBehaviour
     IEnumerator CheckMovement()
     {
         //WALKING
-        Vector3 pos1 = lookAround.PlayerTransform.position;
+        Vector3 pos1 = playerTransform.position;
         yield return new WaitForSeconds(0.05f);
 
-        Vector3 pos2 = lookAround.PlayerTransform.position;
+        Vector3 pos2 = playerTransform.position;
         if(pos1.x == pos2.x && pos1.z == pos2.z)
         {
             isMoving = false;

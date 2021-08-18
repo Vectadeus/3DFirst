@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class LookAround : MonoBehaviour
 {
-    public float MouseSensitivity;
-    public Transform CameraTransform;
-    public Transform PlayerTransform;
-    float Xrotation;
-    public Transform PlayerHead;
-    public float LerpSpeed;
-    public float HeadOffsetY;
-    public Vector3 CameraOffset;
+    [SerializeField] private float MouseSensitivity;
+
+    [SerializeField] private Vector3 CameraOffset;
+    [SerializeField] private float HeadOffsetY;
+    [SerializeField] private float LerpSpeed;
+    [SerializeField] private Transform CameraTransform;
+    [SerializeField] private Transform PlayerTransform;
+    [SerializeField] private Transform PlayerHead;
+    private float Xrotation;
 
 
 
@@ -23,27 +24,20 @@ public class LookAround : MonoBehaviour
         Xrotation -= MouseY;
         Xrotation = Mathf.Clamp(Xrotation, -72f, 80f);
         transform.localRotation = Quaternion.Euler(Xrotation, 0f, 0f);
+
+        CameraTransform.position = Vector3.Lerp(CameraTransform.position, PlayerHead.position + PlayerHead.transform.TransformDirection(CameraOffset), LerpSpeed);
     }
     
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
 
     private void LateUpdate()
     {
         Look();
-
-        //TEST
-        CameraTransform.position = Vector3.Lerp(CameraTransform.position, PlayerHead.position + PlayerHead.transform.TransformDirection(CameraOffset), LerpSpeed);
-
-        //gasrialebisas
-        // X = -0.3
-        // Y = 
     }
 
 
